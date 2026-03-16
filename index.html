@@ -8,10 +8,40 @@
   <meta property="og:title" content="Jamal Alqbail | Cybersecurity Engineer">
   <meta property="og:description" content="Cybersecurity Engineer & Pentester specializing in offensive security, secure development, and red team tooling.">
   <meta property="og:type" content="website">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
+
+<!-- ========== INTRO LOADER OVERLAY ========== -->
+<div id="intro-overlay">
+  <div class="intro-scanlines"></div>
+  <div class="intro-hex-rain" id="hex-rain"></div>
+
+  <div class="intro-center">
+    <div class="intro-glitch" data-text="JAMAL ALQBAIL">JAMAL ALQBAIL</div>
+    <div class="intro-subtitle">
+      <span class="intro-bracket">[</span>
+      <span class="intro-typing" id="intro-typing"></span>
+      <span class="intro-cursor-blink">_</span>
+      <span class="intro-bracket">]</span>
+    </div>
+
+    <div class="intro-progress-wrap">
+      <div class="intro-progress-bar" id="intro-progress"></div>
+    </div>
+    <div class="intro-progress-label" id="intro-percent">0%</div>
+
+    <div class="intro-terminal" id="intro-terminal"></div>
+  </div>
+
+  <div class="intro-corners">
+    <span class="corner tl"></span>
+    <span class="corner tr"></span>
+    <span class="corner bl"></span>
+    <span class="corner br"></span>
+  </div>
+</div>
 
 <!-- Particle Background Canvas -->
 <canvas id="particle-canvas"></canvas>
@@ -579,7 +609,7 @@
 </footer>
 
 <!-- Scripts -->
-<script src="script.js"></script>
+<script src="script.js?v=2"></script>
 <script>lucide.createIcons();</script>
 </body>
 </html>

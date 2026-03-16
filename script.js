@@ -1,7 +1,99 @@
 /* ============================================
    JAMAL ALQBAIL — PORTFOLIO JAVASCRIPT
-   Particles, typing effect, scroll reveal
+   Intro loader, particles, typing, scroll fx
    ============================================ */
+
+// ========== INTRO LOADER ==========
+(function () {
+  document.body.classList.add('intro-active');
+
+  // --- Hex Rain ---
+  const hexRain = document.getElementById('hex-rain');
+  if (hexRain) {
+    const hexChars = '0123456789ABCDEF';
+    const colCount = Math.floor(window.innerWidth / 28);
+    for (let i = 0; i < colCount; i++) {
+      const col = document.createElement('div');
+      col.className = 'hex-column';
+      col.style.left = (i * 28 + Math.random() * 10) + 'px';
+      col.style.animationDuration = (6 + Math.random() * 10) + 's';
+      col.style.animationDelay = (-Math.random() * 8) + 's';
+      let str = '';
+      for (let j = 0; j < 40; j++) {
+        str += hexChars[Math.floor(Math.random() * 16)];
+        if (j % 2 === 1 && j < 39) str += ' ';
+      }
+      col.textContent = str;
+      hexRain.appendChild(col);
+    }
+  }
+
+  // --- Intro subtitle typing ---
+  const introTyping = document.getElementById('intro-typing');
+  const introText = 'INITIALIZING SECURE ENVIRONMENT';
+  let introCharIdx = 0;
+  function introType() {
+    if (!introTyping || introCharIdx > introText.length) return;
+    introTyping.textContent = introText.substring(0, introCharIdx);
+    introCharIdx++;
+    setTimeout(introType, 50);
+  }
+  introType();
+
+  // --- Terminal lines ---
+  const terminal = document.getElementById('intro-terminal');
+  const termLines = [
+    { text: '> Establishing encrypted channel...', cls: 't-key', delay: 600 },
+    { text: '  [OK] TLS 1.3 handshake complete', cls: 't-ok', delay: 1200 },
+    { text: '> Authenticating credentials...', cls: 't-key', delay: 2000 },
+    { text: '  [OK] Identity verified: JAMAL ALQBAIL', cls: 't-ok', delay: 2800 },
+    { text: '> Loading security modules...', cls: 't-key', delay: 3400 },
+    { text: '  [OK] Offensive toolchain ready', cls: 't-ok', delay: 4000 },
+    { text: '  [OK] Cryptographic engine online', cls: 't-ok', delay: 4400 },
+    { text: '> Preparing portfolio interface...', cls: 't-key', delay: 5000 },
+    { text: '  [OK] All systems operational', cls: 't-ok', delay: 5600 },
+  ];
+
+  termLines.forEach(item => {
+    setTimeout(() => {
+      if (!terminal) return;
+      const div = document.createElement('div');
+      div.className = 't-line ' + item.cls;
+      div.textContent = item.text;
+      terminal.appendChild(div);
+      terminal.scrollTop = terminal.scrollHeight;
+    }, item.delay);
+  });
+
+  // --- Progress bar ---
+  const progressBar = document.getElementById('intro-progress');
+  const percentLabel = document.getElementById('intro-percent');
+  const totalDuration = 6000;
+  const startTime = Date.now();
+
+  function updateProgress() {
+    const elapsed = Date.now() - startTime;
+    const pct = Math.min(100, Math.floor((elapsed / totalDuration) * 100));
+    if (progressBar) progressBar.style.width = pct + '%';
+    if (percentLabel) percentLabel.textContent = pct + '%';
+    if (pct < 100) {
+      requestAnimationFrame(updateProgress);
+    }
+  }
+  requestAnimationFrame(updateProgress);
+
+  // --- Fade out & reveal ---
+  setTimeout(() => {
+    const overlay = document.getElementById('intro-overlay');
+    if (overlay) overlay.classList.add('fade-out');
+    document.body.classList.remove('intro-active');
+
+    // Remove from DOM after transition
+    setTimeout(() => {
+      if (overlay) overlay.remove();
+    }, 900);
+  }, totalDuration);
+})();
 
 document.addEventListener('DOMContentLoaded', () => {
 
